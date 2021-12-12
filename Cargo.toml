@@ -1,0 +1,12 @@
+[package]
+name = "grossbuch"
+version = "0.0.0"
+edition = "2021"
+license = "MIT"
+description = "Plain-text accounting"
+authors = ["Anton Ageev <antage@gmail.com>"]
+repository = "https://github.com/antage/grossbuch"
+documentation = "https://docs.rs/grossbuch"
+readme = "README.md"
+
+[dependencies]

@@ -1,0 +1,2 @@
+# grossbuch
+Plain-text accounting
