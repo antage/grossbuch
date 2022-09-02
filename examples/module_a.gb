@@ -1,0 +1,11 @@
+import "module_b.gb";
+
+[2022-01-13] "Wallmart" "Groceries" {
+    Expenses:Foods <- 25.22 USD;
+    Assets:Bank:Card -> 25.22 USD;
+}
+
+[2022-01-14] "Lukoil" "Gas fuel" {
+    Expenses:Auto:Fuel <- 55.00 USD;
+    Assets:Bank:Check -> 55.00 USD;
+}

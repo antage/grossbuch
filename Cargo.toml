@@ -10,3 +10,12 @@ documentation = "https://docs.rs/grossbuch"
 readme = "README.md"
 
 [dependencies]
+chumsky = "0.8"
+ariadne = "0.1"
+strum = "0.24"
+strum_macros = "0.24"
+rust_decimal = "1"
+anyhow = "1"
+thiserror = "1"
+structopt = "0.3"
+solvent = "0.8"
