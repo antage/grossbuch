@@ -9,6 +9,7 @@ use chumsky::{Parser, error::Simple};
 
 use crate::ast::{Module, Span, Spanned, stream_from_file, Token};
 use crate::lexer::{lexer, token_stream};
+use crate::parser::module_parser;
 
 #[derive(Error, Debug)]
 pub enum ParseFileError {
@@ -58,7 +59,7 @@ impl Book {
 
             let parser_stream = token_stream(&path_owned, &src, tokens);
             let ast =
-                Module::parser()
+                module_parser()
                     .parse(parser_stream)
                     .map_err(|err| ParseFileError::ParserError(err))?;
 

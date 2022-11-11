@@ -1,10 +1,6 @@
 use std::fmt::{Display, Formatter};
 
 use strum_macros::EnumDiscriminants;
-use chumsky::prelude::*;
-use rust_decimal::Decimal;
-
-use crate::ast::span::{Span, Spanned};
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, EnumDiscriminants)]
 pub enum Token {
@@ -54,61 +50,6 @@ impl Token {
             Self::Ident(n) => n,
             _ => panic!("can't get Token::Ident inner value"),
         }
-    }
-
-    pub fn int_parser() -> impl Parser<Token, Spanned<String>, Error = Simple<Token, Span>> {
-        filter_map(|span, tok| {
-            match tok {
-                Token::Int(s) => Ok((s, span)),
-                _ => Err(Simple::custom(span, format!("Token::Int is expected but found '{}'", tok))),
-            }
-        })
-    }
-
-    pub fn float_parser() -> impl Parser<Token, Spanned<String>, Error = Simple<Token, Span>> {
-        filter_map(|span, tok| {
-            match tok {
-                Token::Float(s) => Ok((s, span)),
-                _ => Err(Simple::custom(span, format!("Token::Float is expected but found '{}'", tok))),
-            }
-        })
-    }
-
-    pub fn decimal_parser() -> impl Parser<Token, Spanned<Decimal>, Error = Simple<Token, Span>> {
-        Self::float_parser()
-            .or(Self::int_parser())
-            .map(|tok| tok.0)
-            .from_str()
-            .unwrapped()
-            .map_with_span(|tok, span| (tok, span))
-            .labelled("decimal")
-    }
-
-    pub fn str_parser() -> impl Parser<Token, Spanned<String>, Error = Simple<Token, Span>> {
-        filter_map(|span, tok| {
-            match tok {
-                Token::Str(s) => Ok((s, span)),
-                _ => Err(Simple::custom(span, format!("Token::Str is expected but found '{}'", tok))),
-            }
-        })
-    }
-
-    pub fn ident_parser() -> impl Parser<Token, Spanned<String>, Error = Simple<Token, Span>> {
-        filter_map(|span, tok| {
-            match tok {
-                Token::Ident(s) => Ok((s, span)),
-                _ => Err(Simple::custom(span, format!("Token::Ident is expected but found '{}'", tok))),
-            }
-        })
-    }
-
-    pub fn colon_ident_parser() -> impl Parser<Token, Spanned<Vec<String>>, Error = Simple<Token, Span>> {
-        filter_map(|span, tok| {
-            match tok {
-                Token::ColonIdent(s) => Ok((s, span)),
-                _ => Err(Simple::custom(span, format!("Token::ColonIdent is expected but found '{}'", tok))),
-            }
-        })
     }
 }
 

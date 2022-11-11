@@ -17,7 +17,6 @@ struct Opt {
 
 fn display_errors(errs: Vec<Simple<String, Span>>, filename: &PathBuf) -> Result<()> {
     for e in errs {
-        // eprint!("ERR: {:?}", e);
         let report = Report::build(ReportKind::Error, filename, e.span().start());
         let report =
             match e.reason() {
@@ -140,8 +139,6 @@ fn main() -> Result<()> {
             ParseFileError::ImportsCycleError => eprintln!("Error: imports cycle is detected"),
         };
     }
-
-
 
     Ok(())
 }
