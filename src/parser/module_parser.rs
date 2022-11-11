@@ -29,7 +29,7 @@ pub(crate) fn module_parser() -> impl Parser<Token, Spanned<Module>, Error = Sim
 
 #[cfg(test)]
 mod tests {
-    use crate::ast::{Module, Import, Transaction};
+    use crate::ast::Module;
     use super::module_parser as parser;
 
     #[test]
